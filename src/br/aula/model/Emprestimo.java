@@ -7,9 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 
-@Entity(name = "CAD_EMP")
+@Entity
+@Table(name = "CAD_EMP")
 public class Emprestimo {
 	
 	@Id
@@ -19,6 +21,16 @@ public class Emprestimo {
 	@Column(name="EMP_DTEMP")
 	private Date dataEmprestimo;
 	
+	@Column(name="EMP_DTDEV")
+	private Date dataDevolucao;
+	
+	@ManyToOne
+	private Usuario usuario;
+	
+	@ManyToOne
+	private Livro livro;
+	
+
 	public Date getDataEmprestimo() {
 		return dataEmprestimo;
 	}
@@ -50,16 +62,6 @@ public class Emprestimo {
 	public void setLivro(Livro livro) {
 		this.livro = livro;
 	}
-
-	@Column(name="EMP_DTDEV")
-	private Date dataDevolucao;
-	
-	@ManyToOne
-	private Usuario usuario;
-	
-	@ManyToOne
-	private Livro livro;
-	
 	
 	public int getId() {
 		return id;

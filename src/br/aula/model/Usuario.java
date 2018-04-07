@@ -1,12 +1,18 @@
 package br.aula.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 
-@Entity(name = "CAD_USUARIO")
+@Entity
+@Table(name = "CAD_USUARIO")
 public class Usuario {
 
 	@Id
@@ -21,6 +27,14 @@ public class Usuario {
 	
 	@Column(name = "USR_PASS")
 	private String password;
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Emprestimo> emprestimos = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "usuario")
+	private List<Review> review = new ArrayList<>();
+	
+	
 	
 	public int getId() {
 		return id;

@@ -4,6 +4,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.aula.db.HibernateFactory;
+import br.aula.model.Autor;
 import br.aula.model.Livro;
 
 public class IncluindoLivro {
@@ -17,11 +18,18 @@ public class IncluindoLivro {
 	
 		Session s = HibernateFactory.configureSessionFactory().openSession();
 
+		
+		//incluir o livro
 		Livro livro = new Livro();
 		livro.setFoto("livro1.jpg");
 		livro.setQuantidade(10);
-		livro.setTitulo("Java - Como Programar - 10ª Ed. 2016");
-
+		livro.setTitulo("Redes de computadores");
+		
+		
+		//para incluir o ID do autor no Livro
+		Autor autor = (Autor) s.get(Autor.class, 1);
+		livro.setAutor(autor);
+		
 		Transaction t = s.beginTransaction();
 		s.save(livro);
 		t.commit();

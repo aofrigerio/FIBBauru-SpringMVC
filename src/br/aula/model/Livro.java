@@ -1,12 +1,21 @@
 package br.aula.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
-@Entity(name = "CAD_LIVRO")
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
+@Entity
+@Table(name = "CAD_LIVRO")
 public class Livro {
 
 	@Id
@@ -23,7 +32,11 @@ public class Livro {
 	private int quantidade;
 	
 	@ManyToOne
+	@Cascade(CascadeType.SAVE_UPDATE) //Insere um autor se estiver preenchido
 	private Autor autor;
+	
+	@OneToMany(mappedBy="livro")
+	private List<Review> review = new ArrayList<>();
 	
 	public int getId() {
 		return id;
